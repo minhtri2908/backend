@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/:hotelId', isAdmin, createRoom); //only als admin login can you add hotels
 
 //Update Room
-router.put("/availability", updateRoom);
+router.put("/availability/:id", updateRoom);
 
 //For get room by id
 router.get('/:id', getRoom);
