@@ -1,5 +1,7 @@
 import Booking from '../models/Booking.js';
 import Room from '../models/Room.js';
+// const moment = require("moment");
+// var moment = require('moment');
 import moment from 'moment';
 export const newBooking = async (req, res) => {
   const { room, userId, fromDate, toDate, totalPrice, totalDays } = req.body;
@@ -9,8 +11,8 @@ export const newBooking = async (req, res) => {
       room: room.name,
       roomId: room._id,
       userId,
-      fromDate: moment(fromDate,'DD-MM-YY'),
-      toDate: moment(toDate,'DD-MM-YY'),
+      fromDate: moment(fromDate, 'DD-MM-YY'),
+      toDate: moment(toDate, 'DD-MM-YY'),
       totalPrice,
       totalDays,
       transactionId: '1234',
@@ -18,12 +20,12 @@ export const newBooking = async (req, res) => {
 
     const booking = await newBooking.save();
 
-    const roomtemp = await Room.findOne({ _id:  Room.rooms._id });
-    
+    const roomtemp = await Room.roomNumbers.findOne({_id: room._id });
+
     roomtemp.currentbookings.push({
       bookingid: booking._id,
-      fromDate: moment(fromDate,'DD-MM-YY'),
-      toDate: moment(toDate,'DD-MM-YY'),
+      fromDate: moment(fromDate).format('DD-MM-YY'),
+      toDate: moment(toDate).format('DD-MM-YY'),
       userId: userId,
       status: booking.status,
     });
